@@ -1,0 +1,5 @@
+{
+  "name": "Weather & Disaster Watch",
+  "description": "A sophisticated dashboard providing real-time weather forecasts and critical alerts for floods, earthquakes, and avalanches using a predictive test API.",
+  "requestFramePermissions": []
+}
