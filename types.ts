@@ -1,5 +1,12 @@
-
-export type WeatherCondition = 'Sunny' | 'Cloudy' | 'Rainy' | 'Snowy' | 'Thunderstorm' | 'Partly Cloudy';
+export type WeatherCondition =
+  | 'Sunny'
+  | 'Cloudy'
+  | 'Rainy'
+  | 'Snowy'
+  | 'Thunderstorm'
+  | 'Partly Cloudy'
+  | 'Humid' // Added for Mumbai
+  | 'Snowfall'; // Added for Mumbai
 
 export interface CurrentWeather {
   location: string;
@@ -17,7 +24,8 @@ export interface Forecast {
   condition: WeatherCondition;
 }
 
-export type AlertType = 'Flood' | 'Earthquake' | 'Avalanche';
+export type AlertType = 'Flood' | 'Earthquake' | 'Avalanche' | 'Heatwave'; // Added Heatwave
+
 export type AlertSeverity = 'Watch' | 'Warning' | 'Advisory';
 
 export interface Alert {

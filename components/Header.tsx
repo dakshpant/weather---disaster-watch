@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ selectedLocation, onLocationChange }) => {
-  const locations: MockLocation[] = ['San Francisco', 'Denver', 'Miami'];
+  const locations: MockLocation[] = ['Uttarakhand', 'Mumbai', 'Kashmir', 'Jaipur'];
 
   return (
     <header className="bg-slate-900/70 backdrop-blur-sm p-4 flex justify-between items-center border-b border-slate-700 sticky top-0 z-50">

@@ -26,7 +26,7 @@ const useHashNavigation = () => {
 };
 
 const App: React.FC = () => {
-  const [location, setLocation] = useState<MockLocation>('San Francisco');
+  const [location, setLocation] = useState<MockLocation>('Uttarakhand');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
