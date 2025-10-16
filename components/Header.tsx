@@ -7,7 +7,7 @@ interface HeaderProps {
   onLocationChange: (location: MockLocation) => void;
 }
 
-// keep all locations in one array
+// ✅ Added new locations
 const locations: MockLocation[] = [
   'Uttarakhand',
   'Mumbai',
@@ -15,9 +15,8 @@ const locations: MockLocation[] = [
   'Jaipur',
   'Assam',
   'Bihar',
-  'Himachal Pradesh',
-  'Sikkim',
-  'Gujarat',
+  'Punjab',              // 🆕 Added
+  'Himachal Pradesh',    // 🆕 Added
 ];
 
 export const Header: React.FC<HeaderProps> = ({ selectedLocation, onLocationChange }) => {
@@ -43,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ selectedLocation, onLocationChan
           ))}
         </select>
 
-        {/* custom dropdown arrow */}
+        {/* Custom dropdown arrow */}
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
           <svg
             className="w-4 h-4"
@@ -57,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ selectedLocation, onLocationChan
               strokeLinejoin="round"
               strokeWidth="2"
               d="M19 9l-7 7-7-7"
-            ></path>
+            />
           </svg>
         </div>
       </div>

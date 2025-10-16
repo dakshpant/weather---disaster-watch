@@ -6,7 +6,8 @@ export type WeatherCondition =
   | 'Thunderstorm'
   | 'Partly Cloudy'
   | 'Humid' // Added for Mumbai
-  | 'Snowfall'; // Added for Mumbai
+  | 'Snowfall'
+  | 'Foggy'; // Added for Mumbai
 
 export interface CurrentWeather {
   location: string;
