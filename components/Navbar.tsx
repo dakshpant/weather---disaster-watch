@@ -1,38 +1,52 @@
-import React from 'react';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ShieldAlert } from "lucide-react";
+import clsx from "clsx";
 
-interface NavLinkProps {
-    href: string;
-    current: boolean;
-    children: React.ReactNode;
-}
+export const Navbar: React.FC = () => {
+  const location = useLocation();
 
-const NavLink: React.FC<NavLinkProps> = ({ href, current, children }) => {
-    const activeClasses = 'border-cyan-400 text-cyan-400 bg-cyan-900/20';
-    const inactiveClasses = 'border-transparent text-slate-400 hover:text-white hover:border-slate-600';
-    return (
-        <a href={href} className={`py-2 px-3 border-b-2 text-sm font-medium transition-colors duration-200 ${current ? activeClasses : inactiveClasses}`}>
-            {children}
-        </a>
-    )
-};
+  const isActive = (path: string) => location.pathname === path;
 
-interface NavbarProps {
-    route: string;
-}
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-fortis-bg/80 backdrop-blur-md border-b border-fortis-surface h-16 flex items-center px-6 justify-between">
+      <div className="flex items-center gap-2">
+        <ShieldAlert className="w-6 h-6 text-fortis-primary" />
+        <Link to="/" className="text-xl font-bold tracking-wider text-fortis-text">
+          FORTIS
+        </Link>
+      </div>
 
-export const Navbar: React.FC<NavbarProps> = ({ route }) => {
-    return (
-        <nav className="bg-slate-900/70 backdrop-blur-sm border-b border-t border-slate-700">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-center h-12">
-                    <div className="flex items-baseline space-x-2 sm:space-x-4">
-                        <NavLink href="#/" current={route === '#/' || route === ''}>Home</NavLink>
-                        <NavLink href="#/flood" current={route === '#/flood'}>Flood</NavLink>
-                        <NavLink href="#/earthquake" current={route === '#/earthquake'}>Earthquake</NavLink>
-                        <NavLink href="#/avalanche" current={route === '#/avalanche'}>Avalanche</NavLink>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
+      <div className="flex items-center gap-8">
+        <Link
+          to="/"
+          className={clsx(
+            "text-sm font-medium transition-colors hover:text-fortis-primary",
+            isActive("/") ? "text-fortis-primary" : "text-fortis-muted"
+          )}
+        >
+          HOME
+        </Link>
+
+        <Link
+          to="/analysis/Tamil Nadu"
+          className={clsx(
+            "text-sm font-medium transition-colors hover:text-fortis-primary",
+            location.pathname.startsWith("/analysis")
+              ? "text-fortis-primary"
+              : "text-fortis-muted"
+          )}
+        >
+          ANALYSIS
+        </Link>
+
+        {/* <Link
+          to="/about"
+          className="text-sm font-medium text-fortis-muted hover:text-fortis-primary transition-colors"
+        >
+          ABOUT
+        </Link> */}
+      </div>
+    </nav>
+  );
 };

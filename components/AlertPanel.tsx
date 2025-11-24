@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Alert, AlertSeverity, AlertType } from '../types';
-import { FloodIcon, EarthquakeIcon, AvalancheIcon } from './icons';
+import { FloodIcon, EarthquakeIcon, AvalancheIcon, HeatwaveIcon, CycloneIcon, DroughtIcon, LandslideIcon } from './icons';
 
 interface AlertPanelProps {
   alerts: Alert[];
@@ -40,6 +40,10 @@ const AlertIcon: React.FC<{ type: AlertType, className: string }> = ({ type, cla
         case 'Flood': return <FloodIcon className={className} />;
         case 'Earthquake': return <EarthquakeIcon className={className} />;
         case 'Avalanche': return <AvalancheIcon className={className} />;
+        case 'Heatwave': return <HeatwaveIcon className={className} />;
+        case 'Cyclone': return <CycloneIcon className={className} />;
+        case 'Drought': return <DroughtIcon className={className} />;
+        case 'Landslide': return <LandslideIcon className={className} />;
         default: return null;
     }
 }

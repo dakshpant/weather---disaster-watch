@@ -1,5 +1,5 @@
 import React from 'react';
-import type { MockLocation } from '../services/weatherService';
+import { AVAILABLE_LOCATIONS, type MockLocation } from '../services/weatherService';
 import { CloudIcon } from './icons';
 
 interface HeaderProps {
@@ -7,17 +7,8 @@ interface HeaderProps {
   onLocationChange: (location: MockLocation) => void;
 }
 
-// ✅ Added new locations
-const locations: MockLocation[] = [
-  'Uttarakhand',
-  'Mumbai',
-  'Kashmir',
-  'Jaipur',
-  'Assam',
-  'Bihar',
-  'Punjab',              // 🆕 Added
-  'Himachal Pradesh',    // 🆕 Added
-];
+// Use dynamic locations from service
+const locations = AVAILABLE_LOCATIONS;
 
 export const Header: React.FC<HeaderProps> = ({ selectedLocation, onLocationChange }) => {
   return (

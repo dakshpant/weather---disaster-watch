@@ -25,7 +25,7 @@ export interface Forecast {
   condition: WeatherCondition;
 }
 
-export type AlertType = 'Flood' | 'Earthquake' | 'Avalanche' | 'Heatwave'; // Added Heatwave
+export type AlertType = 'Flood' | 'Earthquake' | 'Avalanche' | 'Heatwave' | 'Cyclone' | 'Drought' | 'Landslide';
 
 export type AlertSeverity = 'Watch' | 'Warning' | 'Advisory';
 
@@ -43,3 +43,52 @@ export interface WeatherData {
   forecast: Forecast[];
   alerts: Alert[];
 }
+
+// API-related types
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
+
+export interface GeocodingResult {
+  name: string;
+  latitude: number;
+  longitude: number;
+  country: string;
+  admin1?: string;
+}
+
+export interface OpenMeteoCurrentData {
+  time: string;
+  temperature_2m: number;
+  relativehumidity_2m: number;
+  precipitation: number;
+  windspeed_10m: number;
+  weathercode: number;
+}
+
+export interface OpenMeteoHourly {
+  time: string[];
+  temperature_2m: number[];
+  relativehumidity_2m: number[];
+  precipitation: number[];
+  windspeed_10m: number[];
+  weathercode: number[];
+}
+
+export interface OpenMeteoDaily {
+  time: string[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+  weathercode: number[];
+  precipitation_sum: number[];
+}
+
+export interface OpenMeteoResponse {
+  latitude: number;
+  longitude: number;
+  current?: OpenMeteoCurrentData;
+  hourly?: OpenMeteoHourly;
+  daily?: OpenMeteoDaily;
+}
+

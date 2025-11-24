@@ -1,296 +1,218 @@
-import type { WeatherData } from '../types';
+import type { WeatherData, WeatherCondition, AlertType, AlertSeverity } from '../types';
 
 export type MockLocation =
-  | 'Uttarakhand'
-  | 'Mumbai'
-  | 'Kashmir'
-  | 'Jaipur'
+  | 'Andaman and Nicobar Islands'
+  | 'Andhra Pradesh'
+  | 'Arunachal Pradesh'
   | 'Assam'
-  | 'Himachal Pradesh'
   | 'Bihar'
+  | 'Chandigarh'
+  | 'Chhattisgarh'
+  | 'Dadra and Nagar Haveli and Daman and Diu'
+  | 'Delhi'
+  | 'Goa'
+  | 'Gujarat'
+  | 'Haryana'
+  | 'Himachal Pradesh'
+  | 'Jammu and Kashmir'
+  | 'Jharkhand'
+  | 'Karnataka'
   | 'Kerala'
-  | 'Punjab'; // Added Punjab
+  | 'Ladakh'
+  | 'Lakshadweep'
+  | 'Madhya Pradesh'
+  | 'Maharashtra'
+  | 'Manipur'
+  | 'Meghalaya'
+  | 'Mizoram'
+  | 'Nagaland'
+  | 'Odisha'
+  | 'Puducherry'
+  | 'Punjab'
+  | 'Rajasthan'
+  | 'Sikkim'
+  | 'Tamil Nadu'
+  | 'Telangana'
+  | 'Tripura'
+  | 'Uttar Pradesh'
+  | 'Uttarakhand'
+  | 'West Bengal';
 
-const mockData: Record<MockLocation, WeatherData> = {
-  'Uttarakhand': {
-    current: {
-      location: 'Uttarakhand, IN',
-      temperature: 18,
-      condition: 'Partly Cloudy',
-      humidity: 75,
-      windSpeed: 25,
-      feelsLike: 17,
-    },
-    forecast: [
-      { day: 'Mon', high: 20, low: 14, condition: 'Sunny' },
-      { day: 'Tue', high: 21, low: 15, condition: 'Sunny' },
-      { day: 'Wed', high: 19, low: 13, condition: 'Cloudy' },
-      { day: 'Thu', high: 18, low: 12, condition: 'Rainy' },
-      { day: 'Fri', high: 20, low: 14, condition: 'Partly Cloudy' },
-    ],
-    alerts: [
-      {
-        id: 'UK2024-1',
-        type: 'Earthquake',
-        severity: 'Warning',
-        title: 'Earthquake Warning: 6.8 Magnitude',
-        description:
-          'Strong seismic activity expected. Secure heavy items and prepare emergency kits.',
-        area: 'Uttarakhand Fault Lines',
-      },
-    ],
-  },
-
-  'Mumbai': {
-    current: {
-      location: 'Mumbai, IN',
-      temperature: 30,
-      condition: 'Humid',
-      humidity: 88,
-      windSpeed: 12,
-      feelsLike: 35,
-    },
-    forecast: [
-      { day: 'Mon', high: 32, low: 27, condition: 'Rainy' },
-      { day: 'Tue', high: 31, low: 26, condition: 'Rainy' },
-      { day: 'Wed', high: 30, low: 25, condition: 'Cloudy' },
-      { day: 'Thu', high: 32, low: 27, condition: 'Sunny' },
-      { day: 'Fri', high: 33, low: 28, condition: 'Humid' },
-    ],
-    alerts: [
-      {
-        id: 'MUM2024-1',
-        type: 'Flood',
-        severity: 'Watch',
-        title: 'Monsoon Flood Watch',
-        description:
-          'Heavy rainfall expected. Possible waterlogging in low-lying areas.',
-        area: 'Mumbai Metropolitan Region',
-      },
-    ],
-  },
-
-  'Kashmir': {
-    current: {
-      location: 'Kashmir, IN',
-      temperature: 12,
-      condition: 'Snowfall',
-      humidity: 80,
-      windSpeed: 10,
-      feelsLike: 9,
-    },
-    forecast: [
-      { day: 'Mon', high: 10, low: 2, condition: 'Snowy' },
-      { day: 'Tue', high: 11, low: 1, condition: 'Cloudy' },
-      { day: 'Wed', high: 12, low: 0, condition: 'Snowy' },
-      { day: 'Thu', high: 13, low: 3, condition: 'Sunny' },
-      { day: 'Fri', high: 14, low: 5, condition: 'Partly Cloudy' },
-    ],
-    alerts: [
-      {
-        id: 'KASH2024-1',
-        type: 'Avalanche',
-        severity: 'Warning',
-        title: 'Avalanche Risk',
-        description:
-          'High avalanche danger in higher reaches. Avoid mountain travel.',
-        area: 'Gulmarg & Sonmarg',
-      },
-    ],
-  },
-
-  'Jaipur': {
-    current: {
-      location: 'Jaipur, IN',
-      temperature: 28,
-      condition: 'Thunderstorm',
-      humidity: 92,
-      windSpeed: 30,
-      feelsLike: 32,
-    },
-    forecast: [
-      { day: 'Mon', high: 29, low: 24, condition: 'Thunderstorm' },
-      { day: 'Tue', high: 30, low: 25, condition: 'Rainy' },
-      { day: 'Wed', high: 31, low: 26, condition: 'Partly Cloudy' },
-      { day: 'Thu', high: 30, low: 25, condition: 'Sunny' },
-      { day: 'Fri', high: 29, low: 24, condition: 'Thunderstorm' },
-    ],
-    alerts: [
-      {
-        id: 'JP2024-1',
-        type: 'Heatwave',
-        severity: 'Advisory',
-        title: 'Extreme Heat Advisory',
-        description:
-          'Temperatures may rise above 42°C. Stay hydrated and avoid outdoor work.',
-        area: 'Jaipur & Surroundings',
-      },
-    ],
-  },
-
-  'Assam': {
-    current: {
-      location: 'Assam, IN',
-      temperature: 25,
-      condition: 'Rainy',
-      humidity: 90,
-      windSpeed: 15,
-      feelsLike: 28,
-    },
-    forecast: [
-      { day: 'Mon', high: 27, low: 22, condition: 'Rainy' },
-      { day: 'Tue', high: 28, low: 23, condition: 'Rainy' },
-      { day: 'Wed', high: 26, low: 21, condition: 'Cloudy' },
-      { day: 'Thu', high: 27, low: 22, condition: 'Rainy' },
-      { day: 'Fri', high: 28, low: 23, condition: 'Rainy' },
-    ],
-    alerts: [
-      {
-        id: 'ASM2024-1',
-        type: 'Flood',
-        severity: 'Warning',
-        title: 'Brahmaputra Flood Alert',
-        description:
-          'Rising water levels in Brahmaputra River. Evacuation may be needed in low-lying areas.',
-        area: 'Dispur & Nearby Villages',
-      },
-    ],
-  },
-
-  'Himachal Pradesh': {
-    current: {
-      location: 'Himachal Pradesh, IN',
-      temperature: 14,
-      condition: 'Foggy',
-      humidity: 82,
-      windSpeed: 10,
-      feelsLike: 12,
-    },
-    forecast: [
-      { day: 'Mon', high: 16, low: 10, condition: 'Cloudy' },
-      { day: 'Tue', high: 17, low: 11, condition: 'Rainy' },
-      { day: 'Wed', high: 15, low: 9, condition: 'Foggy' },
-      { day: 'Thu', high: 16, low: 10, condition: 'Cloudy' },
-      { day: 'Fri', high: 17, low: 11, condition: 'Partly Cloudy' },
-    ],
-    alerts: [
-      {
-        id: 'HP2024-1',
-        type: 'Flood',
-        severity: 'Warning',
-        title: 'Landslide & Heavy Rain Alert',
-        description:
-          'Continuous rainfall triggering landslides in Kullu and Mandi regions. Avoid hilly routes.',
-        area: 'Shimla, Kullu & Mandi',
-      },
-    ],
-  },
-
-  'Bihar': {
-    current: {
-      location: 'Bihar, IN',
-      temperature: 33,
-      condition: 'Sunny',
-      humidity: 60,
-      windSpeed: 18,
-      feelsLike: 36,
-    },
-    forecast: [
-      { day: 'Mon', high: 34, low: 28, condition: 'Sunny' },
-      { day: 'Tue', high: 33, low: 27, condition: 'Sunny' },
-      { day: 'Wed', high: 32, low: 26, condition: 'Cloudy' },
-      { day: 'Thu', high: 33, low: 27, condition: 'Sunny' },
-      { day: 'Fri', high: 34, low: 28, condition: 'Sunny' },
-    ],
-    alerts: [
-      {
-        id: 'BR2024-1',
-        type: 'Flood',
-        severity: 'Advisory',
-        title: 'Kosi Flood Advisory',
-        description:
-          'Heavy rainfall in catchment areas may cause flooding.',
-        area: 'Kosi River Basin',
-      },
-    ],
-  },
-
-  'Kerala': {
-    current: {
-      location: 'Kerala, IN',
-      temperature: 29,
-      condition: 'Humid',
-      humidity: 85,
-      windSpeed: 10,
-      feelsLike: 32,
-    },
-    forecast: [
-      { day: 'Mon', high: 30, low: 25, condition: 'Rainy' },
-      { day: 'Tue', high: 31, low: 26, condition: 'Rainy' },
-      { day: 'Wed', high: 29, low: 24, condition: 'Cloudy' },
-      { day: 'Thu', high: 30, low: 25, condition: 'Rainy' },
-      { day: 'Fri', high: 31, low: 26, condition: 'Rainy' },
-    ],
-    alerts: [
-      {
-        id: 'KL2024-1',
-        type: 'Flood',
-        severity: 'Warning',
-        title: 'Heavy Rainfall Flood Watch',
-        description:
-          'Monsoon rains expected. Stay alert for local flooding.',
-        area: 'Kochi & Alappuzha',
-      },
-    ],
-  },
-
-  'Punjab': {
-    current: {
-      location: 'Punjab, IN',
-      temperature: 35,
-      condition: 'Sunny',
-      humidity: 58,
-      windSpeed: 22,
-      feelsLike: 38,
-    },
-    forecast: [
-      { day: 'Mon', high: 36, low: 27, condition: 'Sunny' },
-      { day: 'Tue', high: 37, low: 28, condition: 'Sunny' },
-      { day: 'Wed', high: 34, low: 26, condition: 'Cloudy' },
-      { day: 'Thu', high: 33, low: 25, condition: 'Rainy' },
-      { day: 'Fri', high: 32, low: 24, condition: 'Rainy' },
-    ],
-    alerts: [
-      {
-        id: 'PB2024-1',
-        type: 'Flood',
-        severity: 'Warning',
-        title: 'Beas River Flood Warning',
-        description:
-          'Heavy rains in Himachal leading to overflow in Beas river. Evacuations may be required in border areas.',
-        area: 'Hoshiarpur & Gurdaspur Districts',
-      },
-      {
-        id: 'PB2024-2',
-        type: 'Heatwave',
-        severity: 'Advisory',
-        title: 'Post-Monsoon Heat Advisory',
-        description:
-          'Temperatures expected to rise above 40°C in plains. Stay indoors during peak hours.',
-        area: 'Amritsar & Ludhiana',
-      },
-    ],
-  },
+// Helper function to determine weather condition based on rainfall and temperature
+const getCondition = (rain: number, temp: number, humidity: number): WeatherCondition => {
+  if (rain > 2500) return 'Rainy';
+  if (rain > 1500) return 'Cloudy';
+  if (temp < 20) return 'Partly Cloudy';
+  if (temp > 30 && humidity > 70) return 'Humid';
+  if (temp > 30) return 'Sunny';
+  return 'Partly Cloudy';
 };
 
-export const fetchWeatherData = (location: MockLocation): Promise<WeatherData> => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
+// Helper function to map hazard labels to alert types
+const getAlertType = (hazard: string): AlertType => {
+  if (hazard === 'Flood') return 'Flood';
+  if (hazard === 'Heatwave') return 'Heatwave';
+  if (hazard === 'Landslide') return 'Landslide';
+  if (hazard === 'Cyclone') return 'Cyclone';
+  if (hazard === 'Drought') return 'Drought';
+  return 'Flood';
+};
+
+// Helper function to determine alert severity
+const getAlertSeverity = (hazard: string, rain: number, temp: number): AlertSeverity => {
+  if (hazard === 'Cyclone' || (hazard === 'Flood' && rain > 2500)) return 'Warning';
+  if (hazard === 'Drought' || hazard === 'Heatwave') return 'Advisory';
+  if (hazard === 'Landslide') return 'Warning';
+  return 'Watch';
+};
+
+// Average values calculated from the provided CSV data
+const stateData: Record<MockLocation, {
+  rain: number;
+  temp: number;
+  humidity: number;
+  coastal: boolean;
+  mountainous: boolean;
+  hazard: string;
+}> = {
+  'Andaman and Nicobar Islands': { rain: 3000, temp: 27.0, humidity: 85, coastal: true, mountainous: false, hazard: 'Cyclone' },
+  'Andhra Pradesh': { rain: 1107, temp: 30.0, humidity: 74, coastal: true, mountainous: false, hazard: 'Cyclone' },
+  'Arunachal Pradesh': { rain: 2800, temp: 20.0, humidity: 75, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Assam': { rain: 2818, temp: 25.9, humidity: 80, coastal: false, mountainous: true, hazard: 'Flood' },
+  'Bihar': { rain: 1205, temp: 30.0, humidity: 65, coastal: false, mountainous: false, hazard: 'Flood' },
+  'Chandigarh': { rain: 700, temp: 26.0, humidity: 55, coastal: false, mountainous: false, hazard: 'Heatwave' },
+  'Chhattisgarh': { rain: 1300, temp: 28.0, humidity: 68, coastal: false, mountainous: false, hazard: 'Flood' },
+  'Dadra and Nagar Haveli and Daman and Diu': { rain: 900, temp: 28.0, humidity: 70, coastal: true, mountainous: false, hazard: 'Flood' },
+  'Delhi': { rain: 620, temp: 29.1, humidity: 50, coastal: false, mountainous: false, hazard: 'Heatwave' },
+  'Goa': { rain: 2900, temp: 27.0, humidity: 80, coastal: true, mountainous: false, hazard: 'Flood' },
+  'Gujarat': { rain: 813, temp: 30.0, humidity: 55, coastal: true, mountainous: false, hazard: 'Drought' },
+  'Haryana': { rain: 603, temp: 28.0, humidity: 50, coastal: false, mountainous: false, hazard: 'Heatwave' },
+  'Himachal Pradesh': { rain: 1240, temp: 18.0, humidity: 60, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Jammu and Kashmir': { rain: 1100, temp: 15.0, humidity: 65, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Jharkhand': { rain: 1292, temp: 27.9, humidity: 69, coastal: false, mountainous: false, hazard: 'Flood' },
+  'Karnataka': { rain: 1149, temp: 27.0, humidity: 70, coastal: true, mountainous: false, hazard: 'Flood' },
+  'Kerala': { rain: 2924, temp: 28.0, humidity: 81, coastal: true, mountainous: false, hazard: 'Flood' },
+  'Ladakh': { rain: 100, temp: 5.0, humidity: 40, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Lakshadweep': { rain: 1600, temp: 28.0, humidity: 80, coastal: true, mountainous: false, hazard: 'Cyclone' },
+  'Madhya Pradesh': { rain: 1097, temp: 29.1, humidity: 60, coastal: false, mountainous: false, hazard: 'Heatwave' },
+  'Maharashtra': { rain: 1197, temp: 27.9, humidity: 65, coastal: false, mountainous: false, hazard: 'Flood' },
+  'Manipur': { rain: 1500, temp: 22.0, humidity: 75, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Meghalaya': { rain: 3500, temp: 20.0, humidity: 85, coastal: false, mountainous: true, hazard: 'Flood' },
+  'Mizoram': { rain: 2500, temp: 22.0, humidity: 80, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Nagaland': { rain: 2200, temp: 21.0, humidity: 78, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Odisha': { rain: 1450, temp: 30.0, humidity: 78, coastal: true, mountainous: false, hazard: 'Cyclone' },
+  'Puducherry': { rain: 1200, temp: 29.0, humidity: 75, coastal: true, mountainous: false, hazard: 'Cyclone' },
+  'Punjab': { rain: 644, temp: 27.0, humidity: 54, coastal: false, mountainous: false, hazard: 'Flood' },
+  'Rajasthan': { rain: 554, temp: 32.1, humidity: 45, coastal: false, mountainous: false, hazard: 'Drought' },
+  'Sikkim': { rain: 3000, temp: 18.0, humidity: 80, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'Tamil Nadu': { rain: 954, temp: 29.9, humidity: 70, coastal: true, mountainous: false, hazard: 'Cyclone' },
+  'Telangana': { rain: 905, temp: 29.9, humidity: 54, coastal: false, mountainous: false, hazard: 'Heatwave' },
+  'Tripura': { rain: 2100, temp: 24.0, humidity: 78, coastal: false, mountainous: false, hazard: 'Flood' },
+  'Uttar Pradesh': { rain: 993, temp: 29.0, humidity: 54, coastal: false, mountainous: false, hazard: 'Heatwave' },
+  'Uttarakhand': { rain: 1535, temp: 20.0, humidity: 64, coastal: false, mountainous: true, hazard: 'Landslide' },
+  'West Bengal': { rain: 1736, temp: 29.0, humidity: 78, coastal: true, mountainous: false, hazard: 'Flood' },
+};
+
+export const AVAILABLE_LOCATIONS = Object.keys(stateData) as MockLocation[];
+
+const mockData: Record<MockLocation, WeatherData> = Object.entries(stateData).reduce((acc, [state, data]) => {
+  const location = state as MockLocation;
+  const temp = Math.round(data.temp);
+  const condition = getCondition(data.rain, data.temp, data.humidity);
+  const alertType = getAlertType(data.hazard);
+  const severity = getAlertSeverity(data.hazard, data.rain, data.temp);
+
+  // Generate forecast based on current conditions
+  const forecast = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, i) => ({
+    day,
+    high: temp + 2,
+    low: temp - 5,
+    condition: i % 2 === 0 ? condition : 'Partly Cloudy' as WeatherCondition,
+  }));
+
+  // Generate alert description
+  let alertTitle = '';
+  let alertDescription = '';
+  let affectedArea = location;
+
+  switch (data.hazard) {
+    case 'Flood':
+      alertTitle = 'Flood Warning';
+      alertDescription = `Heavy rainfall expected. Average annual rainfall: ${data.rain}mm. Stay alert for flooding in low-lying areas.`;
+      break;
+    case 'Cyclone':
+      alertTitle = 'Cyclone Alert';
+      alertDescription = `Cyclonic conditions possible in coastal areas. High humidity (${data.humidity}%) and strong winds expected.`;
+      break;
+    case 'Heatwave':
+      alertTitle = 'Heatwave Advisory';
+      alertDescription = `Extreme temperatures (${temp}°C+) expected. Stay hydrated and avoid outdoor activities during peak hours.`;
+      break;
+    case 'Drought':
+      alertTitle = 'Drought Conditions';
+      alertDescription = `Low rainfall (${data.rain}mm annually). Water conservation measures advised.`;
+      break;
+    case 'Landslide':
+      alertTitle = 'Landslide Risk';
+      alertDescription = `Mountainous terrain with ${data.rain}mm annual rainfall. Risk of landslides during monsoon. Avoid hilly routes.`;
+      break;
+  }
+
+  acc[location] = {
+    current: {
+      location: `${location}, IN`,
+      temperature: temp,
+      condition,
+      humidity: data.humidity,
+      windSpeed: 15,
+      feelsLike: temp + 2,
+    },
+    forecast,
+    alerts: [
+      {
+        id: `${location.substring(0, 3).toUpperCase()}2024-1`,
+        type: alertType,
+        severity,
+        title: alertTitle,
+        description: alertDescription,
+        area: affectedArea,
+      },
+    ],
+  };
+
+  return acc;
+}, {} as Record<MockLocation, WeatherData>);
+
+// Import API service and config
+import { USE_MOCK_DATA } from './apiConfig';
+import { fetchWeatherDataFromAPI } from './openMeteoService';
+
+/**
+ * Fetch weather data - delegates to mock or API based on configuration
+ */
+export const fetchWeatherData = async (location: MockLocation): Promise<WeatherData> => {
+  if (USE_MOCK_DATA) {
+    // Use mock data
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (mockData[location]) {
+          resolve(mockData[location]);
+        } else {
+          reject(new Error('Location not found'));
+        }
+      }, 800);
+    });
+  } else {
+    // Use API data
+    try {
+      return await fetchWeatherDataFromAPI(location);
+    } catch (error) {
+      console.error('API fetch failed, falling back to mock data:', error);
+      // Fallback to mock data if API fails
       if (mockData[location]) {
-        resolve(mockData[location]);
-      } else {
-        reject(new Error('Location not found'));
+        return mockData[location];
       }
-    }, 800);
-  });
+      throw new Error('Location not found and API unavailable');
+    }
+  }
 };
