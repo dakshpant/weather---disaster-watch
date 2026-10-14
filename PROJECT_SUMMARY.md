@@ -1,4 +1,7 @@
 # 🎓 University Minor Project - Final Summary
+Members - Daksh Pant
+        - Ankit Verma
+        - Saksham Kumar Verma
 
 ## Project: Weather & Disaster Watch System
 
